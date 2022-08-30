@@ -3,6 +3,7 @@ let container = document.getElementById('container');
 let addBook = document.getElementById('add-btn')
 let addNewBook = document.getElementById('add-book')
 let formContainer = document.getElementById('form-container');
+let numBooks = document.getElementById('num-books');
 
 addBook.addEventListener('click', () => {
     if(formContainer.style.display == 'none') {
@@ -70,6 +71,7 @@ function showBooks() {
        newBook.appendChild(newDeleteButton);
        container.appendChild(newBook);
        refreshNodeLists();
+       incNumBooks();
     })
 }
 
@@ -107,7 +109,16 @@ function refreshNodeLists() {
         button.addEventListener('click', function() {
             isConfirmed = confirm(`Are you sure you want to delete the book - "${this.parentNode.firstChild.innerText}"`)
             if(isConfirmed){
-            container.removeChild(this.parentNode)}
+            container.removeChild(this.parentNode)
+            decNumBooks();}
         })
     })
+}
+
+function incNumBooks() {
+    numBooks.innerText = `0${Number(numBooks.innerText) + 1}`;
+}
+
+function decNumBooks() {
+    numBooks.innerText = `0${Number(numBooks.innerText) - 1}`;
 }
