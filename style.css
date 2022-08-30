@@ -172,7 +172,7 @@ h1 {
 }
 
 #num-books {
-    position: fixed;
+    position: absolute;
     top: 1rem;
     left: 1rem;
     font-size: max(5vw, 25px);
@@ -215,3 +215,13 @@ footer> a >div:hover {
         transform: rotateZ(359deg);
     }
 }
+
+@media screen and (max-width: 620px) {
+    #form-container > form > label {
+        font-size: 14px;
+    }
+    #form-container > form > input[type="text"], input[type="number"] {
+        font-size: 14px;
+    }
+}
+    

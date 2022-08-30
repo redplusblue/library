@@ -29,15 +29,19 @@ class book {
     read = false;
 }
 
+//function to add a book to the library
 function addBookToLibrary(book) {
     library.push(book);
 }
 
+//function to get a book from the library
 function getBookFromLibrary(index) {
     return library[index];
 }
 
+//function to show the books in the library on the page
 function showBooks() {
+    container.innerHTML = "";
     library.forEach(function (book) {
        let newBook = document.createElement('div');
        let newTitle = document.createElement('span'); 
@@ -71,10 +75,11 @@ function showBooks() {
        newBook.appendChild(newDeleteButton);
        container.appendChild(newBook);
        refreshNodeLists();
-       incNumBooks();
+       updateNumBooks();
     })
 }
 
+//function to add books to the page
 function addBooks(title, author, pages, read) {
     if(title.length != 0 && author.length != 0 && typeof(pages) == 'number' && typeof(read) == 'boolean') {
         let newBook = new book();
@@ -89,6 +94,7 @@ function addBooks(title, author, pages, read) {
     }
 }
 
+//So that newly created nodes can be accessed
 function refreshNodeLists() {
     let readButton = document.querySelectorAll("#read-button");
     readButton.forEach(function (button) {
@@ -96,7 +102,7 @@ function refreshNodeLists() {
             if(button.innerText === 'Read') {
                 button.innerText = 'Unread';
                 button.className = 'unread';
-                // Code to make changes in the database as well
+                // Code to make changes in the database as well -- not implemented yet, later.
             } else {
                 button.innerText = 'Read';
                 button.className = 'read';
@@ -110,15 +116,12 @@ function refreshNodeLists() {
             isConfirmed = confirm(`Are you sure you want to delete the book - "${this.parentNode.firstChild.innerText}"`)
             if(isConfirmed){
             container.removeChild(this.parentNode)
-            decNumBooks();}
+            updateNumBooks();}
         })
     })
 }
 
-function incNumBooks() {
-    numBooks.innerText = `0${Number(numBooks.innerText) + 1}`;
-}
-
-function decNumBooks() {
-    numBooks.innerText = `0${Number(numBooks.innerText) - 1}`;
+//function to update the number of books in the library
+function updateNumBooks() {
+    numBooks.innerText = `0${library.length}`;
 }
