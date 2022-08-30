@@ -102,10 +102,17 @@ function refreshNodeLists() {
             if(button.innerText === 'Read') {
                 button.innerText = 'Unread';
                 button.className = 'unread';
-                // Code to make changes in the database as well -- not implemented yet, later.
+                let index = library.findIndex(function (book) {
+                    return book.title === button.parentNode.firstChild.innerText;
+                })
+                library[index].read = false;
             } else {
                 button.innerText = 'Read';
                 button.className = 'read';
+                let index = library.findIndex(function (book) {
+                    return book.title === button.parentNode.firstChild.innerText;
+                })
+                library[index].read = true;
             }
         }); 
     });
@@ -115,6 +122,8 @@ function refreshNodeLists() {
         button.addEventListener('click', function() {
             isConfirmed = confirm(`Are you sure you want to delete the book - "${this.parentNode.firstChild.innerText}"`)
             if(isConfirmed){
+            let index = library.indexOf(this.parentNode);
+            library.splice(index, 1);
             container.removeChild(this.parentNode)
             updateNumBooks();}
         })
