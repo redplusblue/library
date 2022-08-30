@@ -1,0 +1,89 @@
+html {
+    margin: 0;
+}
+
+body {
+    margin: 0;
+    background: rgba(0, 0, 0, 0.1);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+:root {
+    --box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1), 0 2px 3px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    font-size: max(4vw, 25px);
+    margin: 0.8rem;
+    padding: 1rem;
+    box-shadow: var(--box-shadow);
+}
+
+#container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 0.4rem;
+}
+
+#book {
+    /* justify-self: center; Add a media query to center it for mobile phones*/
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: flex-start;
+    box-shadow: var(--box-shadow);
+    margin: 0.8rem;
+    padding: 0.4rem;
+}
+
+#title {
+    font-size: max(2vw, 20px);
+    font-weight: bold;
+    margin: 0.4rem;
+}
+
+#author {
+    font-size: max(1.2vw, 14px);
+    margin: 0.4rem;
+}
+
+#pages {
+    font-size: max(1vw, 12px);
+    margin: 0.4rem;
+}
+
+#read-button, #delete {
+    color: white;
+    border: 0;
+    margin: 0.4rem;
+    padding: 0.4rem;
+    width: 50%;
+    min-width: 50px;
+}
+
+#read-button:hover, #delete:hover {
+    opacity: 75%;
+}
+
+#read-button:after, #delete:after {
+    transform: translateY(-2px);
+}
+
+#read-button {
+    border-radius: 100px;
+}
+
+.read {
+    background: green;
+}
+
+.unread {
+    background: orange;
+}
+
+#delete {
+    background: rgba(255, 0, 0, 0.900);
+    border-radius: 100px;
+}
