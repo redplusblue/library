@@ -3,7 +3,7 @@
 ### Made using HTML/CSS/JS, an exercise for [TheOdinProject](theodinproject.com)
 #### Click on the picture/the link below to try!
 
-<a href="https://redplusblue.github.io/library/"><img src="files/preview.png"></a>
+<a href="https://redplusblue.github.io/library/"><img src="files/preview.png" alt="A preview picture" title="Click Me!"></a>
 
 ## Features: 
 1. Can add Book's title, author, page count and read status. 
