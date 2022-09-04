@@ -22,11 +22,31 @@ addNewBook.addEventListener('click', () => {
     formContainer.style.display = 'none';
 })
 
-class book {
-    title = "";
-    author = "";
-    pages = 0;
-    read = false;
+class Book {
+    constructor(title = "", author = "", pages = 0, read = false) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+    }
+}
+
+class Library {
+    constructor() {
+        this.books = [];
+    }
+
+    addBook(book) {
+        this.books.push(book);
+    }
+
+    removeBook(book) {
+        this.books.splice(this.books.indexOf(book), 1);
+    }
+
+    getBookFromLibrary(title) {
+        return this.books.find(book => book.title === title);
+    }
 }
 
 //function to add a book to the library
@@ -82,7 +102,7 @@ function showBooks() {
 //function to add books to the page
 function addBooks(title, author, pages, read) {
     if(title.length != 0 && author.length != 0 && typeof(pages) == 'number' && typeof(read) == 'boolean') {
-        let newBook = new book();
+        let newBook = new Book();
         newBook.title = title;
         newBook.author = author;
         newBook.pages = pages;
