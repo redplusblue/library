@@ -5,6 +5,7 @@
 
 <a href="https://redplusblue.github.io/library/"><img src="files/preview.png" alt="A preview picture" title="Click Me!"></a>
 
+
 ## Features: 
 1. Can add Book's title, author, page count and read status. 
 2. Can delete books from the list. 
