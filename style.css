@@ -188,6 +188,7 @@ h1 {
 
 #num-books:hover {
     animation: rotate 1s ease-in-out;
+    animation-delay: 0.5s;
 }
 
 footer {
@@ -214,6 +215,7 @@ footer> a >div:hover {
     cursor: pointer;
     background: rgba(0, 0, 0, 0.113); 
     animation: rotate 1s ease-in-out;
+    animation-delay: 0.5s;
 }
 
 @keyframes rotate {
@@ -233,9 +235,17 @@ footer> a >div:hover {
         font-size: 14px;
     }
 }
+
+@media  screen and (max-width: 400px) {
+    #form-container > form > label[for="pages"] {
+        font-size: 10px;
+    }
+}
+    
     
 @media screen and (max-width: 150px) {
     body {
         display: none;
     }
+    
 }
