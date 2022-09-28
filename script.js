@@ -18,6 +18,10 @@ class Library {
         this.books = [];
     }
 
+    getBooks() {
+        return this.books;
+    }
+
     addBook(book) {
         this.books.push(book);
     }
@@ -70,6 +74,7 @@ class Library {
            container.appendChild(newBook);
            updateDisplay.readButtons(newReadButton);
            updateDisplay.deleteButton(newDeleteButton);
+
         })
     }
 
@@ -108,6 +113,7 @@ const updateDisplay = (() => {
             newBook.read = read;
             library.addBook(newBook);
             library.showBooks();
+            storage.saveToStorage(library);
         } else {
             alert("Invalid input!")
         }
@@ -143,5 +149,81 @@ const updateDisplay = (() => {
     return { readButtons, deleteButton, addBooks };
 })();
 
+// Storage, source: MDN
+
+const storage = ((currentLibrary) => {
+    function storageAvailable(type) {
+        let storage;
+        try {
+            storage = window[type];
+            const x = '__storage_test__';
+            storage.setItem(x, x);
+            storage.removeItem(x);
+            return true;
+        }
+        catch (e) {
+            return e instanceof DOMException && (
+                // everything except Firefox
+                e.code === 22 ||
+                // Firefox
+                e.code === 1014 ||
+                // test name field too, because code might not be present
+                // everything except Firefox
+                e.name === 'QuotaExceededError' ||
+                // Firefox
+                e.name === 'NS_ERROR_DOM_QUOTA_REACHED') &&
+                // acknowledge QuotaExceededError only if there's something already stored
+                (storage && storage.length !== 0);
+        }
+    }
+
+    function saveToStorage() {
+        if (storageAvailable('localStorage')) {
+            localStorage.clear();
+            localStorage.setItem('books', JSON.stringify(currentLibrary.getBooks()));
+        } else if (storageAvailable('sessionStorage')) {
+            sessionStorage.clear();
+            sessionStorage.setItem('books', JSON.stringify(currentLibrary.getBooks()));
+        } else {
+            console.log('No storage available');
+        }
+    }
+
+    const checkIfSaved = (storage) => {
+        if (storage.getItem('books') != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    if (storageAvailable('localStorage')) {
+        if (checkIfSaved(localStorage)) {
+            const books = JSON.parse(localStorage.getItem('books'));
+            books.forEach((book) => {
+                currentLibrary.addBook(book);
+            });
+        } else {
+            console.log('No saved projects found!');
+        }
+    }
+    else {
+        if (storageAvailable('sessionStorage')) {
+            checkIfSaved(sessionStorage);
+            if (checkIfSaved(sessionStorage)) {
+                const books = JSON.parse(localStorage.getItem('books'));
+                books.forEach((book) => {
+                    currentLibrary.addBook(book);
+                });
+            } else {
+                console.loglog('No saved projects found!');
+            }
+        }
+        else {
+            alert('No storage available! Your data will not be saved.');
+        }
+    }
+    return { saveToStorage };
+})();
 
 
