@@ -180,7 +180,7 @@ h1 {
     position: absolute;
     top: 1rem;
     left: 1rem;
-    font-size: max(5vw, 25px);
+    font-size: max(4.5vw, 25px);
     font-family: 'Montserrat', sans-serif;
     border: 1px black solid;
     border-radius: 10px;

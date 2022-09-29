@@ -113,7 +113,7 @@ const updateDisplay = (() => {
             newBook.read = read;
             library.addBook(newBook);
             library.showBooks();
-            storage.saveToStorage(library);
+            storage.saveToStorage(library.getBooks());
         } else {
             alert("Invalid input!")
         }
@@ -177,13 +177,13 @@ const storage = ((currentLibrary) => {
         }
     }
 
-    function saveToStorage() {
+    function saveToStorage(currentLibrary) {
         if (storageAvailable('localStorage')) {
             localStorage.clear();
-            localStorage.setItem('books', JSON.stringify(currentLibrary.getBooks()));
+            localStorage.setItem('books', JSON.stringify(currentLibrary));
         } else if (storageAvailable('sessionStorage')) {
             sessionStorage.clear();
-            sessionStorage.setItem('books', JSON.stringify(currentLibrary.getBooks()));
+            sessionStorage.setItem('books', JSON.stringify(currentLibrary));
         } else {
             console.log('No storage available');
         }
@@ -200,11 +200,14 @@ const storage = ((currentLibrary) => {
     if (storageAvailable('localStorage')) {
         if (checkIfSaved(localStorage)) {
             const books = JSON.parse(localStorage.getItem('books'));
+            const library = new Library();
             books.forEach((book) => {
-                currentLibrary.addBook(book);
+                library.addBook(book); 
             });
+            library.showBooks();
+            document.getElementById('form-container').style.display = 'none';
         } else {
-            console.log('No saved projects found!');
+            console.log('localStorage: No saved data found!');
         }
     }
     else {
@@ -212,11 +215,13 @@ const storage = ((currentLibrary) => {
             checkIfSaved(sessionStorage);
             if (checkIfSaved(sessionStorage)) {
                 const books = JSON.parse(localStorage.getItem('books'));
+                const library = new Library();
                 books.forEach((book) => {
-                    currentLibrary.addBook(book);
+                    library.addBook(book); 
                 });
+                library.showBooks();
             } else {
-                console.loglog('No saved projects found!');
+                console.loglog('sessionStorage: No saved data found!');
             }
         }
         else {
