@@ -121,17 +121,20 @@ const updateDisplay = (() => {
     
     const readButtons = (button) => {
             button.addEventListener("click", function () {
+                console.log(library)
+                console.log(button.parentNode.firstChild.innerText)
+                let currentBook = library.getBookByTitle(button.parentNode.firstChild.innerText);
                 if(button.innerText === 'Read') {
                     button.innerText = 'Unread';
                     button.className = 'unread';
-                    let currentBook = library.getBookByTitle(button.parentNode.firstChild.innerText);
                     currentBook.read = false;
                 } else {
                     button.innerText = 'Read';
                     button.className = 'read';
-                    let currentBook = library.getBookByTitle(button.parentNode.firstChild.innerText);
                     currentBook.read = true;
                 }
+                // TBD
+                // storage.saveToStorage(library.getBooks());
             }); 
         };
     
@@ -142,6 +145,7 @@ const updateDisplay = (() => {
                 library.removeBook(library.getBookByTitle(this.parentNode));
                 container.removeChild(this.parentNode)
                 library.updateNumBooks();
+                storage.saveToStorage(library.getBooks());
             }
         })
     }
@@ -206,6 +210,7 @@ const storage = ((currentLibrary) => {
             });
             library.showBooks();
             document.getElementById('form-container').style.display = 'none';
+            library.updateNumBooks();
         } else {
             console.log('localStorage: No saved data found!');
         }
@@ -220,6 +225,8 @@ const storage = ((currentLibrary) => {
                     library.addBook(book); 
                 });
                 library.showBooks();
+                document.getElementById('form-container').style.display = 'none';
+                library.updateNumBooks();
             } else {
                 console.loglog('sessionStorage: No saved data found!');
             }
