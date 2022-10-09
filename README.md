@@ -1,10 +1,18 @@
 # Library
-### An online library that stores information about books for the user. 
-### Made using HTML/CSS/JS, an exercise for [TheOdinProject](theodinproject.com)
-#### Click on the picture/the link below to try!
+### A library in your browser that stores information about books!  
+
+<table>
+  <td align="center"><b>Made using:</b></td>
+  <td> 
+    <img title="HTML5" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-plain.svg" width="40" height="40" alt="HTML5" />
+    <img title="CSS3" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-plain.svg" width="40" height="40" alt="CSS3" />
+    <img title="JavaScript" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-plain.svg" width="40" height="40" alt="JavaScript" />
+  </td>
+</table>
+
+## **Click on the pictures/the link below to try!**
 
 <a href="https://redplusblue.github.io/library/"><img src="files/preview.png" alt="A preview picture" title="Click Me!"></a>
-
 
 ## Features: 
 1. Can add Book's title, author, page count and read status. 
@@ -18,3 +26,6 @@
 2. CSS: `position: absolute;` , grid: auto-fill, `@media` queries
 3. JS: classes, objects, `this` keyword, event listeners, `localStorage` , `sessionStorage`     
 
+<br>
+
+###### An exercise for [TheOdinProject](theodinproject.com)
